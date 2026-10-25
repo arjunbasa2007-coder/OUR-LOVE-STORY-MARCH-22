@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff0f5">
+<title>Our Love Story ❤️</title>
+<style>
+  :root {
+    --rose: #e84a78;
+    --deep: #a51e4b;
+    --pink: #fff0f5;
+    --soft: #ffe0eb;
+    --ink: #512638;
+    --cream: #fffafc;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--ink); font-family: Georgia, "Times New Roman", serif;
+    background: linear-gradient(180deg, #fff5f8 0%, #fffafd 48%, #ffeaf2 100%);
+    overflow-x: hidden;
+  }
+  button, a { -webkit-tap-highlight-color: transparent; }
+  .topbar {
+    position: sticky; top: 0; z-index: 20; display: flex; justify-content: center;
+    gap: 8px; flex-wrap: wrap; padding: 12px 10px;
+    background: rgba(255,250,252,.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid #f8d1df;
+  }
+  .topbar a { color: var(--deep); text-decoration: none; font: 600 13px Arial, sans-serif; padding: 8px 10px; border-radius: 20px; }
+  .topbar a:hover { background: var(--soft); }
+  .hero {
+    min-height: 86vh; display: grid; place-items: center; text-align: center;
+    padding: 72px 20px 60px; position: relative; isolation: isolate;
+    background: radial-gradient(ellipse at top, #ffd6e4 0%, #fff0f5 48%, transparent 78%);
+  }
+  .hero-inner { max-width: 760px; }
+  .eyebrow { font: 700 12px Arial, sans-serif; letter-spacing: 3px; text-transform: uppercase; color: var(--rose); }
+  h1 { font-size: clamp(42px, 9vw, 82px); line-height: 1.02; margin: 18px 0; color: var(--deep); font-weight: 700; }
+  .subtitle { font-size: clamp(17px, 3.5vw, 23px); line-height: 1.6; max-width: 590px; margin: 0 auto 28px; }
+  .heart-seal { font-size: 44px; display: inline-block; animation: heartbeat 1.8s infinite; filter: drop-shadow(0 6px 10px #e84a7840); }
+  .btn {
+    border: 0; border-radius: 999px; padding: 13px 20px; background: var(--rose); color: white;
+    font: 700 14px Arial, sans-serif; cursor: pointer; box-shadow: 0 8px 20px #e84a7830;
+    transition: transform .2s, background .2s; display: inline-block; text-decoration: none;
+  }
+  .btn:hover { transform: translateY(-2px); background: var(--deep); }
+  .btn.secondary { background: white; color: var(--deep); border: 1px solid #f3b5ca; box-shadow: none; }
+  section { padding: 66px 18px; }
+  .section-inner { max-width: 920px; margin: auto; }
+  .section-heading { text-align: center; margin-bottom: 34px; }
+  .section-heading .small { color: var(--rose); font: 700 11px Arial, sans-serif; letter-spacing: 2.5px; text-transform: uppercase; }
+  h2 { color: var(--deep); font-size: clamp(29px, 6vw, 44px); margin: 10px 0; }
+  .section-heading p { line-height: 1.7; max-width: 620px; margin: auto; }
+  .card {
+    background: rgba(255,255,255,.83); border: 1px solid #f7d2df; border-radius: 24px;
+    padding: clamp(20px, 4vw, 34px); box-shadow: 0 12px 35px #a51e4b0c;
+  }
+  .story-text { font-size: 18px; line-height: 1.9; white-space: pre-line; }
+  .timeline { position: relative; max-width: 720px; margin: auto; }
+  .timeline:before { content: ""; position: absolute; left: 18px; top: 8px; bottom: 8px; width: 2px; background: #f2a9c1; }
+  .moment { position: relative; margin: 0 0 22px 48px; }
+  .moment:before { content: "♥"; position: absolute; left: -43px; top: 20px; color: white; background: var(--rose); border-radius: 50%; width: 28px; height: 28px; display: grid; place-items: center; font: 13px Arial; box-shadow: 0 0 0 5px #ffe0eb; }
+  .moment h3 { color: var(--deep); margin: 0 0 8px; font-size: 21px; }
+  .date { font: 700 11px Arial, sans-serif; letter-spacing: 1.4px; color: var(--rose); text-transform: uppercase; }
+  .moment p { line-height: 1.7; margin: 8px 0 0; }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+  .photo-card { background: white; border: 1px solid #f7c8d9; padding: 10px; border-radius: 18px; box-shadow: 0 10px 25px #a51e4b0c; }
+  .photo-frame { aspect-ratio: 4/5; border-radius: 12px; background: linear-gradient(145deg,#ffe1eb,#fff6fa); display: grid; place-items: center; overflow: hidden; position: relative; }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-frame .placeholder { text-align: center; padding: 12px; color: #a53b60; font: 14px Arial,sans-serif; line-height: 1.5; }
+  .photo-card label { display: block; text-align: center; margin-top: 10px; font: 700 12px Arial,sans-serif; color: var(--deep); cursor: pointer; }
+  .photo-card input { display: none; }
+  .caption { font: italic 14px Georgia,serif; text-align: center; margin: 9px 0 2px; }
+  .letter { max-width: 720px; margin: auto; background: #fffdf8; border: 1px solid #f2d5de; border-radius: 6px 24px 6px 24px; padding: clamp(24px, 5vw, 45px); box-shadow: 0 14px 35px #a51e4b12; position: relative; }
+  .letter:before { content: "♥"; position: absolute; right: 22px; top: 18px; font-size: 23px; color: #f0a2bb; }
+  .letter p { line-height: 1.95; font-size: 17px; white-space: pre-line; }
+  .signature { text-align: right; color: var(--deep); font-size: 21px; font-style: italic; }
+  .surprise-wrap { text-align: center; }
+  #surpriseMessage { display: none; margin: 24px auto 0; max-width: 700px; font-size: clamp(20px, 4vw, 28px); line-height: 1.7; color: var(--deep); animation: fadeUp .7s ease both; }
+  footer { text-align: center; padding: 36px 16px 45px; background: #ffe4ed; color: #8e3151; line-height: 1.8; }
+  footer .footer-heart { font-size: 25px; }
+  .music-control { position: fixed; right: 14px; bottom: 14px; z-index: 30; border: 0; border-radius: 50px; background: var(--deep); color: white; padding: 13px 16px; font: 700 13px Arial,sans-serif; box-shadow: 0 8px 22px #7c123c40; cursor: pointer; }
+  .float-heart { position: fixed; bottom: -40px; pointer-events: none; z-index: 0; animation: floatUp linear forwards; opacity: .7; }
+  .hero, section, footer, .topbar { position: relative; z-index: 1; }
+  @keyframes heartbeat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.12); } 30% { transform: scale(1); } 45% { transform: scale(1.08); } }
+  @keyframes floatUp { from { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: .7; } to { transform: translateY(-115vh) rotate(35deg); opacity: 0; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 620px) {
+    .gallery { grid-template-columns: 1fr; max-width: 330px; margin: auto; }
+    .photo-frame { aspect-ratio: 4/3; }
+    .topbar { gap: 2px; }
+    .topbar a { font-size: 12px; padding: 8px 7px; }
+    section { padding: 52px 15px; }
+    .hero { min-height: 78vh; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<nav class="topbar" aria-label="Main navigation">
+  <a href="#story">Our Story</a><a href="#timeline">Our Journey</a><a href="#memories">Memories</a><a href="#letter">Love Letter</a><a href="#surprise">Surprise</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="heart-seal" aria-hidden="true">♥</div>
+    <div class="eyebrow">A little place made just for us</div>
+    <h1>Our Love Story</h1>
+    <p class="subtitle">Two hearts, countless memories, and a story that means the world to us. Every page begins with you. ❤️</p>
+    <a class="btn" href="#story">Read Our Story ↓</a>
+  </div>
+</header>
+
+<main>
+  <section id="story">
+    <div class="section-inner">
+      <div class="section-heading"><div class="small">Chapter One</div><h2>How Our Story Began</h2><p>Every beautiful journey has a beginning. This is ours.</p></div>
+      <div class="card story-text" id="storyText">My love,
+
+Somewhere between our first conversations and all the little moments that followed, you became someone incredibly special to me. The smallest things — a message, a smile, a shared laugh — began to mean so much.
+
+Our story is not about being perfect. It is about learning, caring, making memories, and choosing to understand each other. This little website is a home for the moments I never want to forget.
+
+And this is only our beginning. ❤️</div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="section-inner">
+      <div class="section-heading"><div class="small">Our chapters</div><h2>The Journey So Far</h2><p>Replace these sample moments with the real dates and memories that matter to you both.</p></div>
+      <div class="timeline">
+        <article class="moment card"><div class="date">Our beginning</div><h3>The First Hello 💌</h3><p>The day we first talked — a simple moment that became the start of something meaningful.</p></article>
+        <article class="moment card"><div class="date">A little later</div><h3>When We Got Closer 🫂</h3><p>Our conversations grew, we learned more about each other, and new memories began to form.</p></article>
+        <article class="moment card"><div class="date">A favourite memory</div><h3>A Day to Remember 🌷</h3><p>Write about a day that makes you smile every time you think about it.</p></article>
+        <article class="moment card"><div class="date">Still writing our story</div><h3>More Memories Ahead ✨</h3><p>There are still so many little adventures, laughs, and beautiful moments waiting for us.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="memories">
+    <div class="section-inner">
+      <div class="section-heading"><div class="small">Little moments, forever treasured</div><h2>Our Memory Gallery 📸</h2><p>Tap “Choose photo” on each card to preview your own photos on this device. To publish them, add the photos to your website files as well.</p></div>
+      <div class="gallery">
+        <div class="photo-card"><div class="photo-frame" id="frame1"><div class="placeholder">♡<br>Our favourite photo</div></div><label for="photo1">Choose photo</label><input id="photo1" type="file" accept="image/*" onchange="previewPhoto(event,'frame1')"><p class="caption">A memory I treasure</p></div>
+        <div class="photo-card"><div class="photo-frame" id="frame2"><div class="placeholder">♡<br>A special day</div></div><label for="photo2">Choose photo</label><input id="photo2" type="file" accept="image/*" onchange="previewPhoto(event,'frame2')"><p class="caption">One of our happy moments</p></div>
+        <div class="photo-card"><div class="photo-frame" id="frame3"><div class="placeholder">♡<br>Just us</div></div><label for="photo3">Choose photo</label><input id="photo3" type="file" accept="image/*" onchange="previewPhoto(event,'frame3')"><p class="caption">A little piece of forever</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="letter">
+    <div class="section-inner">
+      <div class="section-heading"><div class="small">From my heart to yours</div><h2>A Letter for You 💌</h2></div>
+      <div class="letter">
+        <p>My favourite person,
+
+If I could keep one thing from all our days, it would be the feeling of having you in my life. Thank you for the laughs, the little moments, the conversations, and the memories that have become part of my heart.
+
+We may not always get everything right, but I hope we keep speaking honestly, caring for each other, and making room for kindness. You deserve to feel loved, respected, and appreciated.
+
+Whenever you visit this page, remember that our story is made of all the little things we share — and that the best memories are the ones we create together.
+
+With all my love,</p>
+        <div class="signature">Yours, always ❤️</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="surprise">
+    <div class="section-inner surprise-wrap">
+      <div class="section-heading"><div class="small">A tiny surprise</div><h2>One Last Little Thing…</h2><p>There is a message waiting just for you.</p></div>
+      <button class="btn" id="surpriseButton" onclick="revealSurprise()">Tap to open your surprise 💗</button>
+      <div id="surpriseMessage">If I could choose one more time, I would still be grateful that our paths crossed. Thank you for being part of my story. Here's to more honest conversations, more laughter, and more beautiful memories together. ❤️</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-heart">♥</div>
+  <div>Made with love, for our little story.</div>
+  <div>Every love story is different. This one is ours. ✨</div>
+</footer>
+
+<button class="music-control" id="musicButton" onclick="toggleMusic()" aria-label="Play or pause gentle background tones">♫ Play music</button>
+
+<script>
+  // PERSONALIZE: Replace the sample words in the page with your own story and memories.
+  // Photo previews are local to your browser. To make photos visible to everyone, upload image files with the website.
+  function previewPhoto(event, frameId) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    const frame = document.getElementById(frameId);
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      frame.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.alt = 'Selected memory photo';
+      frame.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function revealSurprise() {
+    const message = document.getElementById('surpriseMessage');
+    message.style.display = 'block';
+    document.getElementById('surpriseButton').textContent = 'A hug for you ❤️';
+    for (let i = 0; i < 14; i++) createHeart();
+  }
+
+  // Gentle synthesized notes: no external song or audio file is included.
+  // Browsers require a tap before audio can start.
+  let audioContext = null, musicTimer = null, musicPlaying = false, noteIndex = 0;
+  const notes = [261.63, 329.63, 392.00, 329.63, 293.66, 349.23, 440.00, 349.23];
+  function playNote() {
+    if (!audioContext || !musicPlaying) return;
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = notes[noteIndex % notes.length];
+    gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.045, audioContext.currentTime + 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.7);
+    osc.connect(gain); gain.connect(audioContext.destination);
+    osc.start(); osc.stop(audioContext.currentTime + 0.72);
+    noteIndex++;
+  }
+  async function toggleMusic() {
+    const button = document.getElementById('musicButton');
+    if (!musicPlaying) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) { button.textContent = 'Audio not supported'; return; }
+      if (!audioContext) audioContext = new AudioCtx();
+      if (audioContext.state === 'suspended') await audioContext.resume();
+      musicPlaying = true;
+      playNote();
+      musicTimer = setInterval(playNote, 720);
+      button.textContent = '♫ Pause music';
+    } else {
+      musicPlaying = false;
+      clearInterval(musicTimer);
+      button.textContent = '♫ Play music';
+    }
+  }
+
+  function createHeart() {
+    const heart = document.createElement('span');
+    heart.className = 'float-heart';
+    heart.textContent = ['♥', '♡', '❤', '💕'][Math.floor(Math.random() * 4)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (15 + Math.random() * 22) + 'px';
+    heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+    heart.style.color = ['#e84a78', '#c72d60', '#f28eae'][Math.floor(Math.random() * 3)];
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 10500);
+  }
+  setInterval(createHeart, 1500);
+</script>
+</body>
+</html>
